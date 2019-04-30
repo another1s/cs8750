@@ -16,6 +16,24 @@ def trans0(level):
     else:
         return 0
 
+def trans1(t):
+    t = str(t)
+    if t =='BRICKFACE':
+        return 0
+    if t == 'SKY':
+        return 1
+    if t == 'FOLIAGE':
+        return 2
+    if t== 'CEMENT':
+        return 3
+    if t=='WINDOW':
+        return 4
+    if t=='PATH':
+        return 5
+    if t=='GRASS':
+        return 6
+
+
 def load_data(path, filename,f_type):
     d = None
     if f_type is 'txt':
@@ -24,8 +42,11 @@ def load_data(path, filename,f_type):
         #d = np.loadtxt(path+filename, delimiter=',')
         #d = np.loadtxt(path + filename, converters={0 : lambda s: 0, 1:lambda  s:0})
         #d = np.loadtxt(path + filename, skiprows=1, converters={0: lambda s:0}, delimiter=',')
-        d = np.loadtxt(path + filename, converters={0: lambda s: 0}, delimiter=',',encoding='utf-8')
+        #d = np.loadtxt(path + filename, converters={0: lambda s: 0}, delimiter=',',encoding='utf-8')
         #d = np.loadtxt(path + filename, converters={34: trans0}, delimiter=',', encoding='utf-8')
+        #d = np.loadtxt(path + filename, delimiter=',', converters={0: trans1}, encoding='utf-8')
+        #d = np.loadtxt(path + filename)
+        d = np.loadtxt(path + filename, delimiter=',')
         return d
     elif f_type is 'csv':
         csvfile = open(path+filename, 'r',encoding='utf-8')
@@ -167,7 +188,7 @@ for name in names:
     print(t.display_save(test_acc, name))
 '''
 
-
+'''
 names = ['Glass/glass.txt']
 for name in names:
     uci_data = load_data(PATH, name,'txt')
@@ -181,7 +202,7 @@ for name in names:
     test_acc, train_acc = t.model()
     name = 'Glass/glass-bayes.txt'
     print(t.display_save(test_acc, name))
-
+'''
 '''
 names = ['Ionosphere/ionosphere.txt']
 for name in names:
@@ -197,3 +218,50 @@ for name in names:
     name = 'Ionosphere/ionosphere-bayes.txt'
     print(t.display_save(test_acc, name))
 '''
+'''
+names = ['segmentation/segmentation.txt']
+for name in names:
+    uci_data = load_data(PATH, name,'txt')
+    s = uci_data.shape
+    col = s[1]
+    row = s[0]
+    uci_label = uci_data[:,0]
+    uci_data =uci_data[:,1:34]
+    t.data_set.value.append(uci_data)
+    t.data_set.label.append(uci_label)
+    test_acc, train_acc = t.model()
+    name = 'Ionosphere/ionosphere-bayes.txt'
+    print(t.display_save(test_acc, name))
+    print(np.mean(test_acc))
+    '''
+'''
+names = ['page_block/page-blocks.txt']
+for name in names:
+    uci_data = load_data(PATH, name,'txt')
+    s = uci_data.shape
+    col = s[1]
+    row = s[0]
+    uci_label = uci_data[:,10]
+    uci_data =uci_data[:,0:10]
+    t.data_set.value.append(uci_data)
+    t.data_set.label.append(uci_label)
+    test_acc, train_acc = t.model()
+    name = 'Ionosphere/ionosphere-bayes.txt'
+    print(t.display_save(test_acc, name))
+    print(np.mean(test_acc))
+    '''
+names = ['mammographic-masses/mammographic_masses.txt']
+for name in names:
+    uci_data = load_data(PATH, name,'txt')
+    s = uci_data.shape
+    col = s[1]
+    row = s[0]
+    uci_label = uci_data[:,5]
+    uci_data =uci_data[:,0:5]
+    t.data_set.value.append(uci_data)
+    t.data_set.label.append(uci_label)
+    test_acc, train_acc = t.model()
+    name = 'mammographic-masses/mammographic_masses-bayes.txt'
+    print(t.display_save(test_acc, name))
+    print(np.mean(test_acc))
+
