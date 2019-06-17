@@ -15,6 +15,7 @@ def trans0(level):
     else:
         return 0
 
+<<<<<<< HEAD
 def trans1(t):
     t = str(t)
     if t =='BRICKFACE':
@@ -32,6 +33,8 @@ def trans1(t):
     if t=='GRASS':
         return 6
 
+=======
+>>>>>>> first commit
 def load_data(path, filename,f_type):
     d = None
     if f_type is 'txt':
@@ -41,10 +44,14 @@ def load_data(path, filename,f_type):
         #d = np.loadtxt(path + filename, converters={0 : lambda s: 0, 1:lambda  s:0})
         #d = np.loadtxt(path + filename, skiprows=1, converters={0: lambda s:0}, delimiter=',')
         #d = np.loadtxt(path + filename, converters={0: lambda s: 0}, delimiter=',')
+<<<<<<< HEAD
         #d = np.loadtxt(path + filename, converters={34: trans0}, delimiter=',', encoding='utf-8')
         #d = np.loadtxt(path+filename, delimiter=',', converters={0 : trans1},encoding='utf-8')
         #d = np.loadtxt(path + filename)
         d = np.loadtxt(path + filename, delimiter=',')
+=======
+        d = np.loadtxt(path + filename, converters={34: trans0}, delimiter=',', encoding='utf-8')
+>>>>>>> first commit
         return d
     elif f_type is 'csv':
         csvfile = open(path+filename, 'r',encoding='utf-8')
@@ -196,7 +203,10 @@ for name in names:
     test_acc, train_acc = t.model()
     print(t.display_save(test_acc, name))
 '''
+<<<<<<< HEAD
 '''
+=======
+>>>>>>> first commit
 names = ['Ionosphere/ionosphere.txt']
 for name in names:
     uci_data = load_data(PATH, name,'txt')
@@ -208,6 +218,7 @@ for name in names:
     t.data_set.value.append(uci_data)
     t.data_set.label.append(uci_label)
     test_acc, train_acc = t.model()
+<<<<<<< HEAD
     print(t.display_save(test_acc, name))
 '''
 '''
@@ -256,3 +267,6 @@ for name in names:
 
     print(t.display_save(test_acc, name))
     print(np.mean(test_acc))
+=======
+    print(t.display_save(test_acc, name))
+>>>>>>> first commit
